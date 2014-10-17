@@ -2,5 +2,5 @@ box: wercker/ruby
 build:
     steps:
         # Execute the bundle install step, a step provided by wercker
-        - npm install
-        - npm test
+        - npm-install
+        - npm-test
