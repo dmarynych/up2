@@ -1,9 +1,25 @@
-var Repo = require('./models/Repo'),
-    User = require('./models/User'),
+var RepoSchema = require('./schemas/Repo'),
+    UserSchema = require('./schemas/User'),
 
     _ = require('lodash');
 
 var up2 = {
+    models: {},
+
+    init: function(mongoose) {
+        this.mongoose = mongoose;
+
+        this.models.Repo = mongoose.model('Repo', new mongoose.Schema(RepoSchema));
+
+        var UserSchema =new mongoose.Schema(UserSchema);
+        passportLocalMongoose = require('passport-local-mongoose');
+        UserSchema.plugin(passportLocalMongoose);
+
+        this.models.User = mongoose.model('User', UserSchema);
+    },
+
+
+
     /**
      * Функция получает репозитории из базы, отсортированные по времени последней проверки
      *
@@ -11,7 +27,7 @@ var up2 = {
      * @param cb
      */
     getRepos: function(limit, cb) {
-        Repo
+        up2.models.Repo
             .find()
             .sort({ versionCheckTime: 'asc'})
             .limit(limit)
@@ -19,7 +35,7 @@ var up2 = {
     },
 
     addRepo: function(repoData, cb) {
-        new Repo(repoData).save(function(err, data) {
+        new up2.models.Repo(repoData).save(function(err, data) {
             cb(err, repoData);
         });
     },
@@ -27,11 +43,11 @@ var up2 = {
 
 
     getRepo: function(repoData, cb) {
-        Repo.find(repoData, cb);
+        up2.models.Repo.find(repoData, cb);
     },
 
     addRelease: function(repoId, version, releaseDate, cb){
-        Repo.findById(repoId, function(err, repo) {
+        up2.models.Repo.findById(repoId, function(err, repo) {
             repo.releases.push({
                 name: version,
                 releaseDate: releaseDate
@@ -42,27 +58,27 @@ var up2 = {
     },
 
     updateRepo: function(repoId, data, cb) {
-        Repo.findById(repoId, function(err, repo) {
+        up2.models.Repo.findById(repoId, function(err, repo) {
             repo.update(data, cb);
         });
     },
 
 
     getUsers: function(cb) {
-        User
+        up2.models.User
             .find()
             .exec(cb);
     },
 
     addStarredRepo: function(userId, repoUser, repoName, cb) {
-        User.findById(userId, function(err, userData) {
+        up2.models.User.findById(userId, function(err, userData) {
             userData.starred.push(repoUser +'/'+ repoName);
             userData.save(cb);
         });
     },
 
     getUserStarred: function(id, cb) {
-        User.findById(id, function(err, userData) {
+        up2.models.User.findById(id, function(err, userData) {
             cb(err, userData.starred);
         });
     },

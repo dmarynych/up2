@@ -1,7 +1,5 @@
-var mongoose = require('mongoose');
 
-
-var RepoSchema = mongoose.Schema({
+var RepoSchema = {
     "avatar": String,
     "currentVersion":  String,
     "description":  String,
@@ -14,9 +12,9 @@ var RepoSchema = mongoose.Schema({
     "user":  String,
     "versionCheckTime": Number,
     "releases": Array
-});
+};
 
 
-var Repo = mongoose.model('Repo', RepoSchema);
 
-module.exports = Repo;
+
+module.exports = RepoSchema;

@@ -21,5 +21,12 @@
     "expect.js": "~0.3.1",
     "lodash": "~2.4.1",
     "passport-local-mongoose": "~1.0.0"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "up2@0.0.0",
+  "dist": {
+    "shasum": "619c4544ef9d49c05a47342e9eeb648dbf3dad21"
+  },
+  "_resolved": "git://github.com/dmarynych/up2.git#3921fb748cd4720b7f37a444275a3848adf8c17f",
+  "_from": "up2@git://github.com/dmarynych/up2.git"
 }
