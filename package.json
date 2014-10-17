@@ -1,0 +1,25 @@
+{
+  "name": "up2",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dmarynych/up2.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/dmarynych/up2/issues"
+  },
+  "homepage": "https://github.com/dmarynych/up2",
+  "dependencies": {
+    "mongoose": "~3.8.17",
+    "expect.js": "~0.3.1",
+    "lodash": "~2.4.1",
+    "passport-local-mongoose": "~1.0.0"
+  }
+}
