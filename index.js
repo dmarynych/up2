@@ -100,8 +100,8 @@ var up2 = {
             });
         });
 
-        feed = _.sortBy(feed, 'releaseDate');
-        console.log(feed);
+        feed = _.sortBy(feed, function(d) { return -d.releaseDate;});
+        
         return feed;
     }
 
