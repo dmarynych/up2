@@ -80,10 +80,10 @@ var up2 = {
             .exec(cb);
     },
 
-    addStarredRepo: function(userId, repoUser, repoName, cb) {
-        up2.models.User.findById(userId, function(err, userData) {
-            userData.starred.push(repoUser +'/'+ repoName);
-            userData.save(cb);
+    addRepoToList: function(listId, repoUser, repoName, cb) {
+        up2.models.List.findById(listId, function(err, list) {
+            list.repos.push(repoUser +'/'+ repoName);
+            list.save(cb);
         });
     },
 
