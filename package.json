@@ -1,7 +1,6 @@
 {
   "name": "up2",
   "version": "0.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "mocha ./tests"
@@ -27,6 +26,7 @@
   "dist": {
     "shasum": "619c4544ef9d49c05a47342e9eeb648dbf3dad21"
   },
-  "_resolved": "git://github.com/dmarynych/up2.git#3921fb748cd4720b7f37a444275a3848adf8c17f",
-  "_from": "up2@git://github.com/dmarynych/up2.git"
+  "_resolved": "git://github.com/dmarynych/up2.git#fc3ad866e27a45f22a0452c2631a21a14018e1d5",
+  "_from": "up2@git://github.com/dmarynych/up2.git",
+  "_shasum": "8af07d600a5008a992627c3d056aa33b8c593bb0"
 }

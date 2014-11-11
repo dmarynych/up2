@@ -1,21 +1,24 @@
 var RepoSchema = require('./schemas/Repo'),
     UserSchema = require('./schemas/User'),
+    ListSchema = require('./schemas/List'),
 
-    _ = require('lodash');
+    _ = require('lodash'),
+    passportLocalMongoose = require('passport-local-mongoose');
+
 
 var up2 = {
     models: {},
 
     init: function(mongoose) {
+        var UserSchema;
+
         this.mongoose = mongoose;
 
         this.models.Repo = mongoose.model('Repo', new mongoose.Schema(RepoSchema));
+        this.models.List = mongoose.model('List', new mongoose.Schema(ListSchema));
 
-        var UserSchema =new mongoose.Schema(UserSchema);
-        passportLocalMongoose = require('passport-local-mongoose');
-        UserSchema.plugin(passportLocalMongoose);
-
-        this.models.User = mongoose.model('User', UserSchema);
+        this.models.User = mongoose.model('User', new mongoose.Schema(UserSchema)
+            .plugin(passportLocalMongoose));
     },
 
 
@@ -42,8 +45,8 @@ var up2 = {
 
 
 
-    getRepo: function(repoData, cb) {
-        up2.models.Repo.find(repoData, cb);
+    getRepo: function(criteria, cb) {
+        up2.models.Repo.find(criteria, cb);
     },
 
     addRelease: function(repoId, version, releaseDate, cb){
@@ -63,6 +66,13 @@ var up2 = {
         });
     },
 
+    getUserLists: function(criteria, cb) {
+        up2.models.List.find(criteria, cb);
+    },
+    addList: function(data, cb){
+        var list = new up2.models.List(data);
+        list.save(cb);
+    },
 
     getUsers: function(cb) {
         up2.models.User
@@ -100,8 +110,8 @@ var up2 = {
             });
         });
 
-        feed = _.sortBy(feed, 'releaseDate');
-        console.log(feed);
+        feed = _.sortBy(feed, function(d) { return -d.releaseDate;});
+        
         return feed;
     }
 
